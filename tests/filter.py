@@ -6,7 +6,21 @@ import subprocess
 #ffmpeg_unsharp_path = "/home/user/test/ffmpeg/ffmpeg-7.0.1/ffmpeg"
 ffmpeg_unsharp_path = "D:\\problems\\ffmpeg\\ffmpeg-n7.1-latest-win64-lgpl-shared-7.1\\bin\\ffmpeg.exe" #path to patched ffmpeg with unlimited unsparp strength
 
+dct_eraser_path = "D:\\projects\\watermarks\\project\\apps\\RelWithDebInfo\\dct_eraser.exe"
+def dct_eraser(filter, path_source, path_output):
+
+    percentage = 100
+    if "=" in filter:
+        percentage = filter.split('=')[1]
+
+    subprocess.call([dct_eraser_path, "-i", path_source, "-o", path_output, "--erase_probability", percentage], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    
 def run(filter, path_source, path_output):
+    if "dct_eraser" in filter:
+        dct_eraser(filter, path_source, path_output)
+        return
+
+
     if shutil.which("ffmpeg") is None:
         print("Error: ffmpeg executable is not Found")
         return -1
@@ -22,9 +36,14 @@ def run(filter, path_source, path_output):
     subprocess.call([ffmpeg_exe, "-y", "-i", path_source, "-vf", filter, path_output], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("`path_source` argument expected")
-        exit(1)
+#    if len(sys.argv) != 2:
+#        print("`path_source` argument expected")
+#        exit(1)
+
+    run("dct_eraser=100", "12830823_87d2654e31.jpg", "dct_eraser_100.bmp")
+    run("dct_eraser=80", "12830823_87d2654e31.jpg", "dct_eraser_80.bmp")
+    run("dct_eraser=50", "12830823_87d2654e31.jpg", "dct_eraser_50.bmp")
+    run("dct_eraser=10", "12830823_87d2654e31.jpg", "dct_eraser_10.bmp")
 
 #    run("dctdnoiz=s=10", sys.argv[1], "dctdnoiz.png")
 #    run("unsharp=chroma_msize_x=14:chroma_msize_y=14:chroma_amount=-0.25", sys.argv[1], "unsharp1.png")
@@ -41,7 +60,7 @@ if __name__ == "__main__":
 
 #    run("colorlevels=rimax=0.9:gimax=0.9:bimax=0.9", sys.argv[1], "lighter1.png")
 #    run("colorlevels=rimax=0.1:gimax=0.1:bimax=0.1", sys.argv[1], "lighter2.png")
-    run("colorlevels=rimax=0.6:gimax=0.6:bimax=0.6", sys.argv[1], "lighter3.png")
+#    run("colorlevels=rimax=0.6:gimax=0.6:bimax=0.6", sys.argv[1], "lighter3.png")
 #    run("colorlevels=romin=0.05:gomin=0.05:bomin=0.05", sys.argv[1], "brightness05.png")
 #    run("colorlevels=romin=0.1:gomin=0.1:bomin=0.1", sys.argv[1], "brightness1.png")
 #    run("colorlevels=romin=0.2:gomin=0.2:bomin=0.2", sys.argv[1], "brightness2.png")

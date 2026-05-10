@@ -38,6 +38,7 @@ public:
 
 	static const int BLOCK_SIZE = 8;
 	static std::vector<float> zigzagScan(std::vector<float> data);
+	static std::vector<float> izigzagScan(std::vector<float> data);
 private:
 	DetectResult detectInternal(const std::shared_ptr<VideoFrame> pframe, double *pcorrelation, double *averageDCT);
 

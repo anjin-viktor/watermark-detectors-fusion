@@ -44,8 +44,9 @@ namespace
 
 		return isMiddleFrequence;
 	}
+}
 
-	std::vector<float> izigzagScan(std::vector<float> data)
+	std::vector<float> DCTWatermark::izigzagScan(std::vector<float> data)
 	{
 		std::vector<float> result(data);
 
@@ -56,7 +57,7 @@ namespace
 		}
 		return result;
 	}
-}
+
 
 std::vector<float> DCTWatermark::zigzagScan(std::vector<float> data)
 {
