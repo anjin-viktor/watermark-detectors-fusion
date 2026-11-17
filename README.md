@@ -4,6 +4,12 @@ This repository contains Python scripts, C++ implementation of watermarks, and e
 
 The project investigates how the robustness of DCT-domain image watermark detection can be improved by combining multiple correlation-based detection methods using score-level fusion.
 
+## Google Scholar
+
+[Link to paper in Google Scholar](https://scholar.google.com/scholar?cluster=3704870559300364845)
+
+The paper is also stored in the `pdf` directory.
+
 ## Annotation
 
 The paper addresses the issue of improving the robustness of DCT-domain digital image watermark detection by combining correlation-based detection methods. The detection method is treated as a classifier, and the correlation value is interpreted as a confidence score of the decision. Different approaches to combining detection methods through classifier score-level fusion, including summation, minimum and maximum selection are evaluated. Experiments conducted on an image dataset under a range of distortions showed that the highest level of detection robustness is achieved by summation.
